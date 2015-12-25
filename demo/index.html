@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>MagicScroll Demo</title>
+    <link href='https://fonts.googleapis.com/css?family=Lato:400,300,700,900' rel='stylesheet' type='text/css'>
+    <style>
+    body {
+        font-family: Lato, sans-serif;
+        text-align: center;
+        height: 2000px;
+    }
+    h1 {
+        font-weight: 700;
+        font-size: 36px;
+    }
+    h2 {
+        font-weight: 300;
+        font-size: 24px;
+    }
+
+    /* SCROLL TRACK DEMO */
+
+    #scroll-track {
+        position: relative;
+        width: 48px;
+        height: 400px;
+        margin: 0 auto;
+        border-radius: 24px;
+        background: #ddd;
+        margin-top: 100px;
+    }
+    #scroll-ball {
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 48px;
+        height: 48px;
+        margin: 0 auto;
+        border-radius: 24px;
+        background: #111;
+    }
+    #scroll-ball-text {
+        position: absolute;
+        left: 0;
+        top: 0;
+        left: 70px;
+        width: 250px;
+        height: 48px;
+        line-height: 48px;
+        text-align: left;
+    }
+
+    /* SCROLL EVENTS DEMO */
+
+    .scroll-event-ball {
+        width: 48px;
+        height: 48px;
+        background: #111;
+        border-radius: 24px;
+        margin: 150px auto 0 auto;
+        transform: scale(0.25);
+        transition: transform 0.33s cubic-bezier(.55,0,.1,1);
+    }
+    .scroll-event-ball.active {
+        transform: scale(1);
+    }
+    .scroll-event-ball-text {
+        position: absolute;
+        display: none;
+        left: 0;
+        top: 0;
+        left: 70px;
+        width: 250px;
+        height: 48px;
+        line-height: 48px;
+        text-align: left;
+    }
+    .scroll-event-ball.active .scroll-event-ball-text {
+        display: block;
+    }
+    </style>
+</head>
+<body>
+    <h1>MagicScroll</h1>
+    <h2>Demo</h2>
+    <div id="scroll-track">
+        <div id="scroll-ball">
+            <div id="scroll-ball-text">
+                transform: translateY(300px);
+            </div>
+        </div>
+    </div>
+    <div id="scroll-event-ball-1" class="scroll-event-ball"><div class="scroll-event-ball-text">.active</div></div>
+    <div id="scroll-event-ball-2" class="scroll-event-ball"><div class="scroll-event-ball-text">.active</div></div>
+    <div id="scroll-event-ball-3" class="scroll-event-ball"><div class="scroll-event-ball-text">.active</div></div>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+    <script src="../magicScroll.js"></script>
+    <script>
+        ;(function ($, window, document, undefined) {
+            $(document).ready(function() {
+                // Cache
+                var scrollBall = $('#scroll-ball');
+                var scrollBallText = $('#scroll-ball-text');
+
+                // Create a new instance of MagicScroll
+                // for the scroll track example
+                var trackScroller = new MagicScroll({
+                    scrollRange: [0, 620],
+                    domain: [0, 352],
+                    onUpdate: function(v) {
+                        window.requestAnimationFrame(function() {
+                            scrollBall.css({
+                                transform: 'translateY('+ v +'px)'
+                            });
+                            scrollBallText.html('transform: translateY('+ Math.round(v) +'px)');
+                        });
+                    },
+                    onComplete: function() {
+
+                    },
+                    debug: false
+                });
+            });
+        })(jQuery, window, document);
+    </script>
+</body>
+</html>
