@@ -107,7 +107,7 @@
                 // Create a new instance of MagicScroll
                 // for the scroll track example
                 var trackScroller = new MagicScroll({
-                    scrollRange: [0, 620],
+                    scrollRange: [100, 320],
                     domain: [0, 352],
                     onUpdate: function(v) {
                         window.requestAnimationFrame(function() {
@@ -117,10 +117,29 @@
                             scrollBallText.html('transform: translateY('+ Math.round(v) +'px)');
                         });
                     },
-                    onComplete: function() {
+                    onComplete: function(v) {
 
                     },
                     debug: false
+                });
+
+                var eventBall1 = new MagicScroll({
+                    scrollRange: [0, 400],
+                    onComplete: function() {
+                        $('#scroll-event-ball-1').addClass('active');
+                    },
+                });
+                var eventBall1 = new MagicScroll({
+                    scrollRange: [0, 500],
+                    onComplete: function() {
+                        $('#scroll-event-ball-2').addClass('active');
+                    },
+                });
+                var eventBall1 = new MagicScroll({
+                    scrollRange: [0, 600],
+                    onComplete: function() {
+                        $('#scroll-event-ball-3').addClass('active');
+                    },
                 });
             });
         })(jQuery, window, document);
