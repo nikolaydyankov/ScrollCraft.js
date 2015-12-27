@@ -19,6 +19,7 @@ function MagicScroll(options) {
 
         if (scrollTop >= options.scrollRange[0] && scrollTop <= options.scrollRange[1]) {
             if (!self.started) {
+                self.started = true;
                 options.onStart();
             }
 
@@ -39,6 +40,7 @@ function MagicScroll(options) {
             options.onUpdate(v);
 
             if (!self.completed) {
+                self.completed = true;
                 options.onComplete();
             }
         }
