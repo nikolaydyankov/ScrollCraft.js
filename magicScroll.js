@@ -4,6 +4,7 @@ function MagicScroll(options) {
     var defaults = {
         scrollRange: [0, 0],
         domain: [0, 0],
+        loop: false,
         onStart: function() {},
         onUpdate: function() {},
         onComplete: function() {},
@@ -25,13 +26,19 @@ function MagicScroll(options) {
 
             var progress = (scrollTop - options.scrollRange[0]) / (options.scrollRange[1] - options.scrollRange[0]);
             var v = options.domain[0] + progress * (options.domain[1] - options.domain[0]);
-            options.onUpdate(v);
+
+            if (!self.completed || options.loop) {
+                options.onUpdate(v);
+            }
         }
 
         if (scrollTop < options.scrollRange[0]) {
             var progress = 0;
             var v = options.domain[0] + progress * (options.domain[1] - options.domain[0]);
-            options.onUpdate(v);
+
+            if (!self.completed || options.loop) {
+                options.onUpdate(v);
+            }
         }
 
         if (scrollTop > options.scrollRange[1]) {
