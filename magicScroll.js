@@ -6,12 +6,12 @@ function MagicScroll(options) {
         domain: [0, 0],
         loop: true,
         smooth: true,
-        smoothFactor: 0.1,
+        smoothFactor: 0.2,
         onStart: function() {},
         onUpdate: function() {},
         onComplete: function() {},
     }
-    options = $.extend(defaults, true, options);
+    self.options = $.extend(defaults, true, options);
 
     self.currentVal = 0;
     self.targetVal = 0;
@@ -19,76 +19,95 @@ function MagicScroll(options) {
     self.targetScroll = 0;
     self.started = false;
     self.completed = false;
-    options.onUpdate(options.domain[0]);
+
+    self.handleScroll($(window).scrollTop());
 
     $(window).on('scroll', function() {
-        var scrollTop = $(window).scrollTop();
-
-        if (scrollTop >= options.scrollRange[0] && scrollTop <= options.scrollRange[1]) {
-            if (!self.started) {
-                self.started = true;
-                options.onStart();
-            }
-
-            var progress = (scrollTop - options.scrollRange[0]) / (options.scrollRange[1] - options.scrollRange[0]);
-            var v = options.domain[0] + progress * (options.domain[1] - options.domain[0]);
-
-            if (!self.completed || options.loop) {
-                if (options.smooth) {
-                    self.targetVal = v;
-                    self.interpolate(self.currentVal, self.targetVal, options.smoothFactor, function(v) {
-                        options.onUpdate(v);
-                    });
-                } else {
-                    options.onUpdate(v);
-                }
-            }
-        }
-
-        if (scrollTop < options.scrollRange[0]) {
-            var progress = 0;
-            var v = options.domain[0] + progress * (options.domain[1] - options.domain[0]);
-
-            if (!self.completed || options.loop) {
-                if (options.smooth) {
-                    self.targetVal = v;
-                    self.interpolate(self.currentVal, self.targetVal, options.smoothFactor, function(v) {
-                        options.onUpdate(v);
-                    });
-                } else {
-                    options.onUpdate(v);
-                }
-            }
-        }
-
-        if (scrollTop > options.scrollRange[1]) {
-            var progress = 1;
-            var v = options.domain[0] + progress * (options.domain[1] - options.domain[0]);
-            if (options.smooth) {
-                self.targetVal = v;
-                self.interpolate(self.currentVal, self.targetVal, options.smoothFactor, function(v) {
-                    options.onUpdate(v);
-                });
-            } else {
-                options.onUpdate(v);
-            }
-
-            if (!self.completed) {
-                self.completed = true;
-                options.onComplete();
-            }
-        }
-
-        if (options.debug) {
-            console.log('Scroll position: ' + scrollTop);
-        }
+        self.handleScroll($(window).scrollTop());
     });
 }
-MagicScroll.prototype.interpolate = function (start, target, speed, cb) {
+MagicScroll.prototype.handleScroll = function(scrollTop) {
+    var self = this;
+
+    if (scrollTop >= self.options.scrollRange[0] && scrollTop <= self.options.scrollRange[1]) {
+        if (!self.started) {
+            self.started = true;
+            self.options.onStart();
+            self.options.onUpdate(self.options.domain[0]);
+        }
+
+        var progress = (scrollTop - self.options.scrollRange[0]) / (self.options.scrollRange[1] - self.options.scrollRange[0]);
+        var v = self.options.domain[0] + progress * (self.options.domain[1] - self.options.domain[0]);
+
+        if (!self.completed || self.options.loop) {
+            if (self.options.smooth) {
+                self.targetVal = v;
+                self.interpolate(self.currentVal, self.targetVal, self.options.smoothFactor, function(v) {
+                    self.options.onUpdate(v);
+                });
+            } else {
+                self.options.onUpdate(v);
+            }
+        }
+    }
+
+    if (scrollTop < self.options.scrollRange[0]) {
+        var progress = 0;
+        var v = self.options.domain[0] + progress * (self.options.domain[1] - self.options.domain[0]);
+
+        if (!self.completed || self.options.loop) {
+            if (self.options.smooth) {
+                self.targetVal = v;
+                self.interpolate(self.currentVal, self.targetVal, self.options.smoothFactor, function(v) {
+                    self.options.onUpdate(v);
+                });
+            } else {
+                self.options.onUpdate(v);
+            }
+        }
+    }
+
+    if (scrollTop > self.options.scrollRange[1]) {
+        if (!self.started) {
+            self.started = true;
+            self.options.onStart();
+            self.options.onUpdate(self.options.domain[0]);
+        }
+
+        var progress = 1;
+        var v = self.options.domain[0] + progress * (self.options.domain[1] - self.options.domain[0]);
+
+        if (self.options.smooth) {
+            self.targetVal = v;
+            self.interpolate(self.currentVal, self.targetVal, self.options.smoothFactor, function(v) {
+                self.options.onUpdate(v);
+
+                if (v == self.options.domain[1]) {
+                    if (!self.completed) {
+                        self.completed = true;
+                        self.options.onComplete();
+                    }
+                }
+            });
+        } else {
+            self.options.onUpdate(v);
+            if (!self.completed) {
+                self.completed = true;
+                self.options.onComplete();
+            }
+        }
+
+    }
+
+    if (self.options.debug) {
+        console.log('Scroll position: ' + scrollTop);
+    }
+}
+MagicScroll.prototype.interpolate = function(start, target, speed, cb) {
     var self = this;
     setTimeout(function() {
         self.currentVal = (1-speed)*start + speed*target;
-        if (Math.abs(self.currentVal - self.targetVal) > 1) {
+        if (Math.abs(self.currentVal - self.targetVal) > Math.abs(self.options.domain[0] - self.options.domain[1])/100) {
             cb(self.currentVal);
             self.interpolate(self.currentVal, self.targetVal, speed, cb);
         } else {
