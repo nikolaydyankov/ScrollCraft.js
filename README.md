@@ -5,7 +5,7 @@ A JavaScript helper class to help you create parallax and other scrolling behavi
 ### Installation
 
 ```sh
-bower install magic-scroll --save
+bower install scroll-craft --save
 ```
 
 ### How to Use
