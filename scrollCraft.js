@@ -1,8 +1,8 @@
-// MagicScroll.js
+// ScrollCraft.js
 // Author: Nikolay Dyankov
 // 2016
 // GNU GENERAL PUBLIC LICENSE
-// https://github.com/nikolaydyankov/magic-scroll
+// https://github.com/nikolaydyankov/ScrollCraft.js
 
 ;(function ($, window, document, undefined) {
 
@@ -49,11 +49,11 @@
         onComplete: function() {},
     }
 
-    $.MagicScroll = function(options) {
-        var magicScroll = new MagicScroll(options);
+    $.ScrollCraft = function(options) {
+        var instance = new ScrollCraft(options);
     }
 
-    function MagicScroll(options) {
+    function ScrollCraft(options) {
         this.options = $.extend({}, defaults, options);
         this.v = 0;
 
@@ -71,7 +71,7 @@
 
     // Initialization.
     // Creates a scroll event listener and evaluates the current scroll position
-    MagicScroll.prototype.init = function() {
+    ScrollCraft.prototype.init = function() {
 
         // Create the scroll event listener
         var self = this;
@@ -84,7 +84,7 @@
     }
 
     // Called on each scroll event
-    MagicScroll.prototype.handleScroll = function(scrollTop) {
+    ScrollCraft.prototype.handleScroll = function(scrollTop) {
         if (!this.completed) {
             var s = this.getScrollPosition();
 
@@ -118,7 +118,7 @@
         }
     }
 
-    MagicScroll.prototype.update = function(s) {
+    ScrollCraft.prototype.update = function(s) {
         if (this.options.smooth) {
             // Set the target value for the interpolator
             this.tv = this.valueForScroll(s);
@@ -139,7 +139,7 @@
 
     // Calculates the current scroll position, based on the "normalizeScrollRange"
     // and "scrollRange" parameters
-    MagicScroll.prototype.getScrollPosition = function() {
+    ScrollCraft.prototype.getScrollPosition = function() {
         var s = 0;
         if (this.options.normalizeScrollRange) {
             // Calculate a relative scroll position, based on the window's height
@@ -161,7 +161,7 @@
 
     // Takes a scroll position as an argument and calculates the value, that gets
     // returned from the script
-    MagicScroll.prototype.valueForScroll = function(scroll) {
+    ScrollCraft.prototype.valueForScroll = function(scroll) {
         // "progress" is a value that goes from 0 to 1, depending on the current
         // scroll position and the scrollRange
         var progress = (scroll - this.options.scrollRange[0]) / (this.options.scrollRange[1] - this.options.scrollRange[0]);
@@ -175,7 +175,7 @@
 
     // Takes a starting and a target value and continuously sends updates to
     // its callback function
-    MagicScroll.prototype.interpolate = function(start, target, speed, cb) {
+    ScrollCraft.prototype.interpolate = function(start, target, speed, cb) {
         var self = this;
         setTimeout(function() {
             self.iv = (1 - speed) * start + speed * target;

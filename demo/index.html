@@ -2,7 +2,7 @@
 <html>
 <head>
     <meta charset="utf-8">
-    <title>MagicScroll Demo</title>
+    <title>ScrollCraft.js Demo</title>
     <link href='https://fonts.googleapis.com/css?family=Lato:400,300,700,900' rel='stylesheet' type='text/css'>
     <style>
     body {
@@ -82,7 +82,7 @@
     </style>
 </head>
 <body>
-    <h1>MagicScroll</h1>
+    <h1>ScrollCraft.js</h1>
     <h2>Demo</h2>
     <div id="scroll-track">
         <div id="scroll-ball">
@@ -96,26 +96,26 @@
     <div id="scroll-event-ball-3" class="scroll-event-ball"><div class="scroll-event-ball-text">.active</div></div>
 
     <script src="../bower_components/jquery/dist/jquery.min.js"></script>
-    <script src="../magicScroll.js"></script>
+    <script src="../scrollCraft.js"></script>
     <script>
         ;(function ($, window, document, undefined) {
             $(document).ready(function() {
                 // Simple example - when the scroll reaches X, add class to an element
-                $.MagicScroll({
+                $.ScrollCraft({
                     scrollRange: [0, 0.37],
                     onComplete: function(v) {
                         $('#scroll-event-ball-1').addClass('active');
                     },
                     smooth: false
                 });
-                $.MagicScroll({
+                $.ScrollCraft({
                     scrollRange: [0, 0.48],
                     onComplete: function(v) {
                         $('#scroll-event-ball-2').addClass('active');
                     },
                     smooth: false
                 });
-                $.MagicScroll({
+                $.ScrollCraft({
                     scrollRange: [0, 0.59],
                     onComplete: function(v) {
                         $('#scroll-event-ball-3').addClass('active');
@@ -128,7 +128,7 @@
                 var scrollBallText = $('#scroll-ball-text');
 
                 // More advanced example - smoothly move the track ball up and down
-                $.MagicScroll({
+                $.ScrollCraft({
                     scrollRange: [0, 0.65],
                     domain: [0, 352],
                     onUpdate: function(v) {

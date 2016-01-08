@@ -1,12 +1,12 @@
 {
-  "name": "magic-scroll",
+  "name": "scroll-craft",
   "version": "0.1.0",
-  "homepage": "https://github.com/nikolaydyankov/magic-scroll",
+  "homepage": "https://github.com/nikolaydyankov/ScrollCraft.js",
   "authors": [
     "dyankov <dyankov.nikolay@gmail.com>"
   ],
   "description": "A JavaScript helper class to help you create parallax and other scrolling behaviours.",
-  "main": "magicScroll.js",
+  "main": "ScrollCraft.js",
   "keywords": [
     "parallax",
     "scrolling",
