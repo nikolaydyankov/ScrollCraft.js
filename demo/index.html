@@ -95,7 +95,7 @@
     <div id="scroll-event-ball-2" class="scroll-event-ball"><div class="scroll-event-ball-text">.active</div></div>
     <div id="scroll-event-ball-3" class="scroll-event-ball"><div class="scroll-event-ball-text">.active</div></div>
 
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+    <script src="../bower_components/jquery/dist/jquery.min.js"></script>
     <script src="../magicScroll.js"></script>
     <script>
         ;(function ($, window, document, undefined) {
@@ -106,7 +106,6 @@
                     onComplete: function(v) {
                         $('#scroll-event-ball-1').addClass('active');
                     },
-                    debug: false,
                     smooth: false
                 });
                 $.MagicScroll({
@@ -114,7 +113,6 @@
                     onComplete: function(v) {
                         $('#scroll-event-ball-2').addClass('active');
                     },
-                    debug: false,
                     smooth: false
                 });
                 $.MagicScroll({
@@ -122,7 +120,6 @@
                     onComplete: function(v) {
                         $('#scroll-event-ball-3').addClass('active');
                     },
-                    debug: false,
                     smooth: false
                 });
 

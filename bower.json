@@ -1,0 +1,26 @@
+{
+  "name": "magic-scroll",
+  "version": "0.1.0",
+  "homepage": "https://github.com/nikolaydyankov/magic-scroll",
+  "authors": [
+    "dyankov <dyankov.nikolay@gmail.com>"
+  ],
+  "description": "A JavaScript helper class to help you create parallax and other scrolling behaviours.",
+  "main": "magicScroll.js",
+  "keywords": [
+    "parallax",
+    "scrolling",
+    "behaviour"
+  ],
+  "license": "GNU",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "jquery": "~2.1.4"
+  }
+}
