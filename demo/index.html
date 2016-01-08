@@ -100,14 +100,39 @@
     <script>
         ;(function ($, window, document, undefined) {
             $(document).ready(function() {
+                // Simple example - when the scroll reaches X, add class to an element
+                $.MagicScroll({
+                    scrollRange: [0, 0.37],
+                    onComplete: function(v) {
+                        $('#scroll-event-ball-1').addClass('active');
+                    },
+                    debug: false,
+                    smooth: false
+                });
+                $.MagicScroll({
+                    scrollRange: [0, 0.48],
+                    onComplete: function(v) {
+                        $('#scroll-event-ball-2').addClass('active');
+                    },
+                    debug: false,
+                    smooth: false
+                });
+                $.MagicScroll({
+                    scrollRange: [0, 0.59],
+                    onComplete: function(v) {
+                        $('#scroll-event-ball-3').addClass('active');
+                    },
+                    debug: false,
+                    smooth: false
+                });
+
                 // Cache
                 var scrollBall = $('#scroll-ball');
                 var scrollBallText = $('#scroll-ball-text');
 
-                // Create a new instance of MagicScroll
-                // for the scroll track example
-                var trackScroller = new MagicScroll({
-                    scrollRange: [100, 320],
+                // More advanced example - smoothly move the track ball up and down
+                $.MagicScroll({
+                    scrollRange: [0, 0.65],
                     domain: [0, 352],
                     onUpdate: function(v) {
                         window.requestAnimationFrame(function() {
@@ -121,25 +146,6 @@
 
                     },
                     debug: false
-                });
-
-                var eventBall1 = new MagicScroll({
-                    scrollRange: [0, 400],
-                    onComplete: function() {
-                        $('#scroll-event-ball-1').addClass('active');
-                    },
-                });
-                var eventBall1 = new MagicScroll({
-                    scrollRange: [0, 500],
-                    onComplete: function() {
-                        $('#scroll-event-ball-2').addClass('active');
-                    },
-                });
-                var eventBall1 = new MagicScroll({
-                    scrollRange: [0, 600],
-                    onComplete: function() {
-                        $('#scroll-event-ball-3').addClass('active');
-                    },
                 });
             });
         })(jQuery, window, document);
