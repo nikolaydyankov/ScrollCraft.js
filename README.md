@@ -32,6 +32,7 @@ $.MagicScroll({
         with relative values to the screen size, instead of absolute pixel values.
         HIGHLY RECOMMENDED to leave this to "true" to achieve consistent results
         accross different screen sizes!
+        
   - `scrollRange` (array, default: [0, 0]) - The scrolling behaviour will occur between scrollRange[0] and scrollRange[1]
   - `domain` (array, default: [0, 1]) - An arbitrary variable (returned value) that changes from domain[0] to domain[1] depending on
         the current "scrollRange". Also, this is the value that is returned with the onUpdate() callback.
