@@ -1,4 +1,4 @@
-# MagicScroll.js
+# ScrollCraft.js
 
 A JavaScript helper class to help you create parallax and other scrolling behaviours.
 
@@ -11,7 +11,7 @@ bower install magic-scroll --save
 ### How to Use
 
 ```
-$.MagicScroll({
+$.ScrollCraft({
     scrollRange: [0, 0.25],
     onStart: function() {
         $('#my-element').addClass('active');
