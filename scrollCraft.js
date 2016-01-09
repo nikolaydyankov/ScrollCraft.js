@@ -17,10 +17,12 @@
         normalizeScrollRange: true,
 
         // The scrolling behaviour will occur between scrollRange[0] and scrollRange[1]
-        scrollRange: [0, 0],
+        // If normalizeScrollRange is disabled, this parameter will take pixels
+        // It's best to enable the "debug" option to set proper values for scrollRange.
+        scrollRange: [0, 1],
 
-        // An arbitrary variable (returned value) that changes depending on
-        // the current scroll position, relative to "scrollRange"
+        // An arbitrary variable, returned with the onUpdate() callback,
+        // that changes based on the current scroll position.
         domain: [0, 1],
 
         // If set to false, the "returned value" will stop changing after
@@ -47,6 +49,10 @@
 
         // Called when the scroll position becomes greater than scrollRange[1]
         onComplete: function() {},
+
+        // If enabled, it will log the current scroll position of the window
+        // to the console, so you can more easily set the "scrollRange" values.
+        debug: false
     }
 
     $.ScrollCraft = function(options) {
