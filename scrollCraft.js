@@ -120,7 +120,18 @@
         // If "debug" is set to true, log the current scroll position
         // This is used to setup the script more easily
         if (this.options.debug) {
-            console.log(this.getScrollPosition());
+            var sDebug = 0;
+            if (this.options.normalizeScrollRange) {
+                // Calculate a relative scroll position, based on the window's height
+                // and the scroll position in pixels
+                var scrollTop = $(window).scrollTop();
+                sDebug = scrollTop / ($(document).height() - $(window).height());
+            } else {
+                // If "normalizeScrollRange" is false, simply return the current
+                // scroll position in pixels
+                sDebug = $(window).scrollTop();
+            }
+            console.log(sDebug);
         }
     }
 
